@@ -1,0 +1,30 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  NODE_ENV: production
+
+before_script:
+  - npm install
+
+build_job:
+  stage: build
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+
+test_job:
+  stage: test
+  script:
+    - npm test
+
+deploy_job:
+  stage: deploy
+  script:
+    - npm run deploy
+  only:
+    - main
